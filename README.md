@@ -69,6 +69,6 @@ graph TD
 
 ---
 
-📜 **Licença**: GNU AGPLv3 - Detalhes completos
+📜 **Licença**: GNU AGPLv3
 
 ⚠️ **Aviso**: Para fins educacionais - Teste exaustivamente antes de usar com fundos reais

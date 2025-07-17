@@ -1,4 +1,4 @@
-# 📈 Trading Bot para Binance Testnet
+# 📈 FIDU - Trading Bot para Binance
 
 **Bot automatizado para trading algorítmico com análise técnica (MACD, RSI e StochRSI) - Licenciado sob AGPL-3.0**
 

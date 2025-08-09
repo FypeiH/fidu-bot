@@ -1,12 +1,12 @@
+import os
+import sys
 import ccxt
 import talib
 import numpy as np
-import schedule
 import time
 from decouple import config
-from datetime import datetime
-import os
-import sys
+from decouple import AutoConfig
+
 
 # Handle .env path for PyInstaller
 if getattr(sys, 'frozen', False):
@@ -17,7 +17,6 @@ else:
     env_path = '.env'
 
 # Explicitly load .env (python-decouple doesn't auto-load from custom paths)
-from decouple import AutoConfig
 config = AutoConfig(search_path=env_path)
 
 # Now use `config` to read variables

@@ -5,11 +5,29 @@ import schedule
 import time
 from decouple import config
 from datetime import datetime
+import os
+import sys
+
+# Handle .env path for PyInstaller
+if getattr(sys, 'frozen', False):
+    # Running as a bundled executable
+    env_path = os.path.join(sys._MEIPASS, '.env')
+else:
+    # Running as a normal Python script
+    env_path = '.env'
+
+# Explicitly load .env (python-decouple doesn't auto-load from custom paths)
+from decouple import AutoConfig
+config = AutoConfig(search_path=env_path)
+
+# Now use `config` to read variables
+BINANCE_API_KEY = config('BINANCE_API_KEY')
+BINANCE_SECRET_KEY = config('BINANCE_SECRET_KEY')
 
 # Initialize Binance API connection
 exchange = ccxt.binance({
-    'apiKey': config('BINANCE_API_KEY'),
-    'secret': config('BINANCE_SECRET_KEY'),
+    'apiKey': BINANCE_API_KEY,
+    'secret': BINANCE_SECRET_KEY,
     'enableRateLimit': True,
     'options': {
         'defaultType': 'spot',
@@ -82,10 +100,10 @@ def calculate_indicators(prices, volumes):
             timeperiod=14,      
             fastk_period=14,    
             fastd_period=3,     
-            fastd_matype=3      
+            fastd_matype=0      
         )
-        valid_k = fastk[~np.isnan(fastk)]
-        stoch_rsi = valid_k[-1]
+        valid_p = fastd[~np.isnan(fastk)]
+        stoch_rsi = valid_p[-1]
                 
         # Volume e Volume MA (10 períodos)
         current_volume = volumes[-1]
